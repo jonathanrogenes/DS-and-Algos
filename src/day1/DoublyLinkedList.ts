@@ -25,7 +25,7 @@ export default class DoublyLinkedList<T> {
         return
       }
       node.next = this.head
-      this.head.next = node
+      this.head.prev = node
       this.head = node
 
 }
