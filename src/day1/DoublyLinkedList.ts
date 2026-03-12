@@ -21,16 +21,16 @@ export default class DoublyLinkedList<T> {
 
       this.length++
       if (!this.head) {
-        this.head = this.tail =  node
+        this.head = this.tail = node
         return
       }
-
       node.next = this.head
-      this.head.prev = node
+      this.head.next = node
       this.head = node
+
 }
     insertAt(item: T, idx: number): void {
-      if (idx > length) {
+      if (idx > this.length) {
         throw new Error('oh no')
       } else if (idx === this.length) {
         this.append(item)
@@ -42,7 +42,7 @@ export default class DoublyLinkedList<T> {
 
       this.length++
       let curr = this.head
-      for (let i= 0; curr && i < idx; i++) {
+      for (let i = 0; curr && idx < this.length; i++) {
         curr = curr.next
       }
       curr = curr as Node<T>
@@ -51,10 +51,11 @@ export default class DoublyLinkedList<T> {
       node.next = curr
       node.prev = curr.prev
       curr.prev = node
-
-      if (curr.prev) {
-        curr.prev.next = node
+      if (node.prev) {
+        node.prev.next = node
       }
+
+
 }
     append(item: T): void {
       this.length++
